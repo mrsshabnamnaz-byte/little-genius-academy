@@ -81,3 +81,17 @@ Warna login, password reset aur email ke links nahi chalenge.
 
 ## Baad mein update kaise karein
 Code badlein > VS Code Source Control > Commit > Sync. Netlify khud nayi website bana deta hai.
+
+
+---------------------------------------------------------------
+## Agar aap Vercel use kar rahi hain (Netlify ki jagah)
+1. vercel.com par GitHub se login karein, **Add New > Project**, apni repository chunein.
+2. **Root Directory**: agar GitHub par saari files ek aur `little-genius-academy` folder ke ANDAR hain
+   (repository kholne par pehle sirf ek folder nazar aaye), to Root Directory mein wohi folder ka naam likhein.
+   Agar index.html, css, js seedha repository ke upar nazar aate hain to Root Directory khali rakhein.
+3. Framework Preset: **Other**. Build command aur Output directory khali. **Deploy**.
+4. Hamesha site ko **root address** se kholein (https://aap-ka-naam.vercel.app/), kisi folder ke naam ke baghair.
+   Warna CSS aur JavaScript ke raste toot jate hain aur login nahi chalta.
+5. `vercel.json` (security headers) is zip mein hai. Wo Root Directory ke andar hona chahiye (index.html ke saath).
+6. Supabase > Authentication > URL Configuration mein Site URL aur Redirect URLs mein Vercel ka link daalein.
+7. Har dafa code badalne par: VS Code > Source Control > Commit > Sync. Vercel khud nayi site bana deta hai.

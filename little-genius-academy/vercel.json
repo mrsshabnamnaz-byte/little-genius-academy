@@ -1,0 +1,60 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/database/:path*",
+      "destination": "/404.html",
+      "permanent": false
+    },
+    {
+      "source": "/PLAN.md",
+      "destination": "/404.html",
+      "permanent": false
+    },
+    {
+      "source": "/DEPLOY.md",
+      "destination": "/404.html",
+      "permanent": false
+    },
+    {
+      "source": "/netlify.toml",
+      "destination": "/404.html",
+      "permanent": false
+    },
+    {
+      "source": "/vercel.json",
+      "destination": "/404.html",
+      "permanent": false
+    }
+  ]
+}
