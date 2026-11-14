@@ -13,6 +13,6 @@ window.LGA_CONFIG = {
   // Paste YOUR OWN values from Supabase → Project Settings → API.
   // Use only the Project URL and the public "anon / publishable" key.
   // NEVER paste the service_role key here.
-  supabaseUrl: "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE",
-  supabaseAnonKey: "PASTE_YOUR_SUPABASE_ANON_PUBLIC_KEY_HERE"
+  supabaseUrl: "https://jcxvjuwhdwcfkofoiqee.supabase.co",
+  supabaseAnonKey: "sb_publishable_AnTGzgye2GL2ZL0YBqgskw_YpfAz4GN"
 };
