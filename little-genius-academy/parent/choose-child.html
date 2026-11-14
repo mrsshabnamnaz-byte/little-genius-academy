@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Who is learning today? — Little Genius Academy</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="../" data-page="choose-child">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <div class="area-bar"><div class="container area-bar__inner">
+    <nav aria-label="Parent area">
+      <a href="choose-child.html">Choose child</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="add-child.html">Add child</a>
+      <a href="progress.html">Progress</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <span><span id="who"></span> <button type="button" class="btn btn--ghost btn--small" id="logout-btn">Log out</button></span>
+  </div></div>
+  <main id="main">
+    <section class="section"><div class="container center">
+      <h1>Who is learning today?</h1>
+      <p class="msg" id="page-msg" role="alert" hidden></p>
+      <div class="child-grid" id="child-grid" aria-live="polite"><p class="muted">Loading…</p></div>
+      <div id="empty" hidden class="card" style="max-width:480px;margin:0 auto">
+        <h3>Let's add your first child</h3>
+        <p class="muted" style="margin-bottom:16px">Create a profile with just a nickname and an avatar.</p>
+        <a class="btn btn--sun" href="add-child.html">Add a child</a>
+      </div>
+    </div></section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/parent-dashboard.js"></script>
+</body>
+</html>

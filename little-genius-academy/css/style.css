@@ -1,0 +1,200 @@
+/* =========================================================
+   LITTLE GENIUS ACADEMY — Design system (style.css)
+   Mobile-first. Tokens first, then base, layout, components.
+   ========================================================= */
+
+:root {
+  /* Brand palette */
+  --sky: #4cc3ff;
+  --sky-deep: #1d8fd6;
+  --purple: #9b7bff;
+  --purple-deep: #5b3fc4;
+  --sun: #ffd84a;
+  --mint: #5fdcb0;
+  --coral: #ff8a65;
+  --white: #ffffff;
+  --bg: #f6f9ff;
+  --ink: #26264a;
+  --ink-soft: #55557a;
+  --night: #1e1b4b;          /* deep indigo for footer / loader */
+
+  /* Creator-credit accents (warm gold) */
+  --gold: #c9973a;           /* on light backgrounds */
+  --gold-light: #e8c777;     /* on dark backgrounds */
+
+  --radius: 24px;
+  --radius-sm: 14px;
+  --shadow: 0 10px 30px rgba(60, 50, 140, 0.15);
+  --font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-script: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+img, svg, canvas { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0 0 .5em; }
+h1 { font-size: clamp(2.2rem, 7vw, 4rem); }
+h2 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); }
+a { color: var(--purple-deep); }
+:focus-visible { outline: 3px solid var(--purple-deep); outline-offset: 3px; border-radius: 6px; }
+
+.container { width: min(1120px, 100% - 32px); margin-inline: auto; }
+.section { padding: 56px 0; }
+.skip-link {
+  position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff;
+  padding: 8px 14px; border-radius: 8px; z-index: 100;
+}
+.skip-link:focus { left: 8px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 52px; padding: 12px 28px; border-radius: 999px; border: 0;
+  font: 800 1.05rem var(--font-display); text-decoration: none; cursor: pointer;
+  color: #fff; background: var(--purple-deep); box-shadow: 0 6px 0 #3f2a94;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #3f2a94; }
+.btn--sun { background: var(--sun); color: var(--ink); box-shadow: 0 6px 0 #d6b020; }
+.btn--ghost { background: #fff; color: var(--purple-deep); box-shadow: 0 6px 0 #d9d3f5; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+  box-shadow: 0 2px 16px rgba(60,50,140,.08);
+}
+.site-header__bar { display: flex; align-items: center; justify-content: space-between; min-height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font: 800 1.25rem var(--font-display); }
+.brand__logo {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--sky), var(--purple)); color: #fff; font-size: 1.4rem;
+}
+.nav-toggle {
+  min-width: 48px; min-height: 48px; border-radius: 12px; border: 2px solid #e3e0f7;
+  background: #fff; font-size: 1.4rem; cursor: pointer;
+}
+.nav { display: none; flex-direction: column; gap: 4px; padding: 8px 0 16px; }
+.nav.is-open { display: flex; }
+.nav a { padding: 12px 14px; border-radius: 12px; text-decoration: none; color: var(--ink); font-weight: 700; }
+.nav a:hover, .nav a[aria-current="page"] { background: #efeaff; color: var(--purple-deep); }
+.nav a.btn { margin-top: 8px; }
+.nav a.btn--ghost { color: var(--purple-deep); }
+.nav a.btn--ghost:hover { background: #fff; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; overflow: hidden; text-align: center; padding: 72px 0 96px;
+  background: linear-gradient(180deg, #bfe8ff 0%, #e6dcff 60%, var(--bg) 100%);
+}
+.hero__tag { font: 800 1rem var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--purple-deep); }
+.hero p.lead { max-width: 640px; margin: 0 auto 28px; color: var(--ink-soft); font-size: 1.2rem; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.floaters { position: absolute; inset: 0; pointer-events: none; }
+.floater {
+  position: absolute; font: 800 clamp(2rem, 6vw, 3.6rem) var(--font-display);
+  opacity: .85; animation: float 6s ease-in-out infinite;
+}
+
+/* ---------- Cards ---------- */
+.grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+.card {
+  background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow);
+}
+.card__icon { font-size: 2.6rem; }
+.card--sky { border-top: 8px solid var(--sky); }
+.card--sun { border-top: 8px solid var(--sun); }
+.card--mint { border-top: 8px solid var(--mint); }
+.card--coral { border-top: 8px solid var(--coral); }
+.card--purple { border-top: 8px solid var(--purple); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--night); color: #d8d6f5; padding: 48px 0 28px; margin-top: 40px; }
+.site-footer a { color: #fff; }
+.footer__grid { display: grid; gap: 24px; }
+.footer__links { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; padding: 0; margin: 0; }
+.footer__links a { text-decoration: none; }
+.footer__links a:hover { text-decoration: underline; }
+.footer__note { font-size: .9rem; color: #b5b2e0; }
+.footer__bottom {
+  margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.12);
+  display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
+  font-size: .9rem; color: #b5b2e0;
+}
+
+/* =========================================================
+   CREATOR CREDIT — "Made by Mrs. Shabnam Naz Lakho"
+   One reusable component, used in footer, homepage, loader,
+   and About page. Always secondary to the brand.
+   Variants: --dark (on dark bg), --light (on light bg)
+   ========================================================= */
+.creator-credit {
+  display: inline-flex; align-items: center; gap: 12px; margin: 0;
+  font-family: var(--font-script); font-style: italic; font-weight: 600;
+  font-size: 1.15rem; letter-spacing: .04em; line-height: 1.2;
+  color: var(--gold);
+  opacity: 0; animation: credit-fade 1.4s ease .5s forwards;
+}
+.creator-credit::before, .creator-credit::after {
+  content: ""; width: 28px; height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.creator-credit::after { transform: scaleX(-1); }
+.creator-credit--dark { color: var(--gold-light); }
+.creator-credit--small { font-size: 1rem; }
+
+/* Homepage band */
+.credit-band { text-align: center; padding: 8px 0 40px; }
+
+/* About page "Created By" section */
+.created-by {
+  text-align: center; background: #fff; border-radius: var(--radius);
+  padding: 40px 24px; box-shadow: var(--shadow); border: 1px solid #f0e3c4;
+}
+.created-by__label {
+  font: 700 .8rem var(--font-body); letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
+  margin: 0 0 12px;
+}
+.created-by .creator-credit { font-size: clamp(1.5rem, 4.5vw, 2.1rem); }
+.created-by__text { max-width: 520px; margin: 16px auto 0; color: var(--ink-soft); font-size: 1rem; }
+
+/* ---------- Welcome / loading screen ---------- */
+.loader {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-content: center; gap: 14px;
+  text-align: center; color: #fff; padding: 24px;
+  background: radial-gradient(circle at 50% 40%, #4a3fb5, var(--night));
+  transition: opacity .6s ease, visibility .6s ease;
+}
+.loader.is-hidden { opacity: 0; visibility: hidden; }
+.loader__logo { font: 800 clamp(2rem, 8vw, 3.2rem) var(--font-display); }
+.loader__tag { letter-spacing: .2em; text-transform: uppercase; font-size: .85rem; color: #cfc9ff; }
+.loader__spinner {
+  width: 44px; height: 44px; margin: 8px auto; border-radius: 50%;
+  border: 5px solid rgba(255,255,255,.2); border-top-color: var(--sun);
+  animation: spin 1s linear infinite;
+}
+.loader .creator-credit { justify-self: center; margin-top: 18px; font-size: .95rem; animation-delay: .8s; }
+
+/* ---------- Utility ---------- */
+.center { text-align: center; }
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.badge-soon {
+  display: inline-block; background: #fff3c4; color: #7a5b00; border-radius: 999px;
+  padding: 2px 12px; font-size: .8rem; font-weight: 800;
+}
+
+/* Make the "hidden" attribute always win over display rules */
+[hidden] { display: none !important; }

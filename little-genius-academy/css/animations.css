@@ -1,0 +1,23 @@
+/* Little Genius Academy — animations.css
+   Gentle motion only. Everything is switched off for people who prefer reduced motion. */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-18px) rotate(4deg); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes credit-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .floater { animation: none; }
+  .creator-credit { opacity: 1; animation: none; }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — Little Genius Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="../" data-page="admin">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <div class="area-bar"><div class="container area-bar__inner">
+    <nav aria-label="Admin area">
+      <a href="index.html" aria-current="page">Admin home</a>
+      <a href="lessons.html">Lessons &amp; stories</a>
+      <a href="../parent/choose-child.html">← Parent area</a>
+    </nav>
+    <span><span id="who"></span> <button type="button" class="btn btn--ghost btn--small" id="logout-btn">Log out</button></span>
+  </div></div>
+  <main id="main">
+    <section class="section"><div class="container">
+      <p class="msg" id="page-msg" role="alert" hidden></p>
+      <div class="card form-card" id="denied" hidden>
+        <h1 style="font-size:1.8rem">Admins only</h1>
+        <p>This area is only for the website owner. Your account is a normal parent account, so you cannot open it.</p>
+        <p class="muted">Owner? Follow the steps in <strong>database/make_admin.sql</strong> once, then log out and log in again.</p>
+        <a class="btn" href="../parent/choose-child.html">Back to the parent area</a>
+      </div>
+      <div id="admin-content" hidden>
+        <h1>Admin home</h1>
+        <p class="muted">A quick look at how the academy is doing. Only counts are shown; no child details.</p>
+        <div class="grid grid--3 stats" id="stats" aria-live="polite"><p class="muted">Loading…</p></div>
+        <h2 style="margin-top:32px">Games</h2>
+        <p class="muted">Switch a game off to hide it from children. Switch it on to show it again.</p>
+        <div class="admin-list" id="game-list" aria-live="polite"></div>
+        <p style="margin-top:28px"><a class="btn" href="lessons.html">Manage lessons &amp; stories →</a></p>
+      </div>
+    </div></section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

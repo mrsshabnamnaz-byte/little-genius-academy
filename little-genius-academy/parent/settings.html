@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings — Little Genius Academy</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="../" data-page="settings">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <div class="area-bar"><div class="container area-bar__inner">
+    <nav aria-label="Parent area">
+      <a href="choose-child.html">Choose child</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="add-child.html">Add child</a>
+      <a href="progress.html">Progress</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <span><span id="who"></span> <button type="button" class="btn btn--ghost btn--small" id="logout-btn">Log out</button></span>
+  </div></div>
+  <main id="main">
+    <section class="section"><div class="container">
+      <h1>Settings</h1>
+      <p class="msg" id="page-msg" role="alert" hidden></p>
+      <div class="card form-card" style="margin:0 0 28px">
+        <h2 style="font-size:1.4rem">Your name</h2>
+        <p class="msg" id="name-msg" role="status" hidden></p>
+        <form id="name-form" novalidate>
+          <div class="field"><label for="fullName">Name</label><input type="text" id="fullName" name="fullName" maxlength="100" autocomplete="name"></div>
+          <button class="btn btn--small" type="submit">Save name</button>
+        </form>
+      </div>
+      <h2>Daily screen time</h2>
+      <p class="muted" style="margin-bottom:16px">When the time is used up, your child sees a friendly break message. Time is counted each time a lesson or game is finished. You can change this at any time.</p>
+      <div class="grid grid--3" id="limit-list" aria-live="polite"><p class="muted">Loading…</p></div>
+    </div></section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/reports.js"></script>
+</body>
+</html>

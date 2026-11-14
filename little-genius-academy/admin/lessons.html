@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin lessons — Little Genius Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="../" data-page="admin-lessons">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <div class="area-bar"><div class="container area-bar__inner">
+    <nav aria-label="Admin area">
+      <a href="index.html">Admin home</a>
+      <a href="lessons.html" aria-current="page">Lessons &amp; stories</a>
+      <a href="../parent/choose-child.html">← Parent area</a>
+    </nav>
+    <span><span id="who"></span> <button type="button" class="btn btn--ghost btn--small" id="logout-btn">Log out</button></span>
+  </div></div>
+  <main id="main">
+    <section class="section"><div class="container">
+      <p class="msg" id="page-msg" role="alert" hidden></p>
+      <div class="card form-card" id="denied" hidden>
+        <h1 style="font-size:1.8rem">Admins only</h1>
+        <p>This area is only for the website owner. Your account is a normal parent account, so you cannot open it.</p>
+        <p class="muted">Owner? Follow the steps in <strong>database/make_admin.sql</strong> once, then log out and log in again.</p>
+        <a class="btn" href="../parent/choose-child.html">Back to the parent area</a>
+      </div>
+      <div id="admin-content" hidden>
+        <h1>Lessons &amp; stories</h1>
+        <p class="muted">Add a new story or rhyme, hide a lesson from children, or fix a spelling mistake.</p>
+        <div class="admin-bar">
+          <button type="button" class="btn" id="add-btn">➕ Add a story or rhyme</button>
+          <label class="visually-hidden" for="subject-filter">Show lessons of</label>
+          <select id="subject-filter" class="admin-select"><option value="">All subjects</option></select>
+        </div>
+
+        <div class="card form-card admin-form" id="story-card" hidden>
+          <h2 id="form-title" style="font-size:1.4rem">Add a story or rhyme</h2>
+          <p class="msg" id="form-msg" role="alert" hidden></p>
+          <form id="story-form" novalidate>
+            <div class="field"><label for="f-title">Title</label><input type="text" id="f-title" maxlength="80" required></div>
+            <div class="field"><label for="f-kind">Type</label>
+              <select id="f-kind"><option value="story">Story (read aloud)</option><option value="rhyme">Rhyme (sing along)</option></select></div>
+            <div class="field"><label for="f-desc">Short description</label><input type="text" id="f-desc" maxlength="120" placeholder="One short line children's parents will read"></div>
+            <div class="field"><label for="f-level">Learning level</label><select id="f-level"></select></div>
+            <div class="field"><label for="f-diff">Difficulty</label>
+              <select id="f-diff"><option value="1">1 – very easy</option><option value="2">2 – easy</option><option value="3">3 – medium</option></select></div>
+            <div class="field"><label for="f-pages">Pages</label>
+              <textarea id="f-pages" rows="10" maxlength="4000" required placeholder="Write one page, then leave an EMPTY line, then write the next page.&#10;&#10;🐥 Sunny is a little yellow duck.&#10;&#10;🌧️ One morning, Sunny sees a puddle."></textarea>
+              <p class="muted" style="margin:6px 0 0">Between pages leave one empty line. You may start a page with an emoji (like 🐥) to show on the picture. Up to 12 pages, 300 letters each.</p></div>
+            <div class="admin-bar">
+              <button class="btn" id="save-btn" type="submit">Save</button>
+              <button class="btn btn--ghost" id="cancel-btn" type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="admin-list" id="lesson-list" aria-live="polite"><p class="muted">Loading…</p></div>
+      </div>
+    </div></section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

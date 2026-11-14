@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Break time — Little Genius Academy</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/learning.css">
+  <link rel="stylesheet" href="../css/games.css">
+  <link rel="stylesheet" href="../css/fun.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="child-theme" data-root="../" data-page="timeup">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <main id="main">
+    <section class="section"><div class="container">
+      <div class="card card--purple form-card center">
+        <div class="card__icon" aria-hidden="true">🌙</div>
+        <h1 style="font-size:2rem">Time for a break!</h1>
+        <p>You did lots of learning today. See you tomorrow!</p>
+        <p class="muted">Grown-ups can change the time in Settings.</p>
+        <p><button class="btn btn--ghost" type="button" id="switch-btn">Switch child</button>
+           <button class="btn btn--ghost" type="button" id="parent-btn">For parents</button></p>
+      </div>
+    </div></section>
+    <div class="modal" id="gate" hidden role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="modal__box">
+        <h2 id="gate-title">Grown-ups only</h2>
+        <p class="msg" id="gate-msg" role="alert" hidden></p>
+        <form id="gate-form" novalidate>
+          <div class="field"><label for="answer" id="gate-question"></label><input type="number" id="answer" name="answer" inputmode="numeric" required></div>
+          <div class="modal__actions"><button class="btn" type="submit">Continue</button><button class="btn btn--ghost" type="button" id="gate-cancel">Cancel</button></div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/fun.js"></script>
+  <script src="../js/lesson-data.js"></script>
+  <script src="../js/sound.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/timeup.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parent dashboard — Little Genius Academy</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="../" data-page="parent-dashboard">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <div class="area-bar"><div class="container area-bar__inner">
+    <nav aria-label="Parent area">
+      <a href="choose-child.html">Choose child</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="add-child.html">Add child</a>
+      <a href="progress.html">Progress</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <span><span id="who"></span> <button type="button" class="btn btn--ghost btn--small" id="logout-btn">Log out</button></span>
+  </div></div>
+  <main id="main">
+    <section class="section"><div class="container">
+      <h1>Parent dashboard</h1>
+      <p class="msg" id="page-msg" role="alert" hidden></p>
+      <div class="stat-grid">
+        <div class="stat"><strong id="stat-children">–</strong>Children</div>
+        <div class="stat"><strong id="stat-lessons">–</strong>Lessons completed</div>
+        <div class="stat"><strong id="stat-time">–</strong>Learning time</div>
+      </div>
+      <div class="grid grid--3" id="child-cards" aria-live="polite"><p class="muted">Loading…</p></div>
+      <div id="empty" hidden class="card" style="max-width:480px">
+        <h3>No children yet</h3>
+        <p class="muted" style="margin-bottom:16px">Add a child to start learning together.</p>
+      </div>
+      <p style="margin-top:24px"><a class="btn" href="add-child.html">Add a child</a></p>
+      <p style="margin-top:20px"><a class="btn btn--ghost" href="reports.html">Weekly report</a> <a class="btn btn--ghost" href="progress.html">Progress</a> <a class="btn btn--ghost" href="settings.html">Screen time</a></p>
+    </div></section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/parent-dashboard.js"></script>
+</body>
+</html>

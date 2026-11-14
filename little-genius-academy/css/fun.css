@@ -1,0 +1,85 @@
+/* Little Genius Academy — fun.css : bursts, banner, confetti, mascot, colorful child theme */
+
+/* ---------- Sparkle burst ---------- */
+.spark { position: fixed; z-index: 400; pointer-events: none; font-size: 1.5rem; animation: spark .95s ease-out forwards; }
+@keyframes spark {
+  0%   { transform: translate(-50%, -50%) scale(.3); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3) rotate(200deg); opacity: 0; }
+}
+
+/* ---------- Feedback banner ---------- */
+.fun-banner {
+  position: fixed; top: 84px; left: 50%; z-index: 350; pointer-events: none; opacity: 0;
+  transform: translate(-50%, -30px) scale(.8); white-space: nowrap; max-width: 92vw;
+  font: 800 clamp(1.4rem, 5vw, 2.2rem) var(--font-display); color: #fff; letter-spacing: .02em;
+  padding: 10px 30px; border-radius: 999px; box-shadow: 0 10px 30px rgba(11, 92, 59, .35);
+  background: linear-gradient(135deg, #3fd39b, #19a974); border: 4px solid #fff;
+}
+.fun-banner::before { content: "✨ "; } .fun-banner::after { content: " ✨"; }
+.fun-banner.is-show { animation: banner-in 1.7s ease forwards; }
+@keyframes banner-in {
+  0%   { opacity: 0; transform: translate(-50%, -30px) scale(.8); }
+  15%  { opacity: 1; transform: translate(-50%, 0) scale(1.12); }
+  25%  { transform: translate(-50%, 0) scale(1); }
+  80%  { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -10px) scale(.95); }
+}
+
+/* ---------- Confetti ---------- */
+.confetti { position: fixed; top: -40px; z-index: 380; pointer-events: none; animation: confetti-fall linear forwards; }
+@keyframes confetti-fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+/* ---------- Sparky the mascot ---------- */
+.mascot { position: relative; width: 96px; height: 96px; display: inline-block; animation: bob 3s ease-in-out infinite; }
+.mascot__svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 8px rgba(60, 50, 140, .25)); }
+.mascot--corner { position: fixed; left: 12px; bottom: 12px; width: 72px; height: 72px; z-index: 120; }
+.mascot__bubble {
+  position: absolute; left: 70%; bottom: 85%; width: max-content; max-width: 190px; z-index: 2;
+  background: #fff; color: var(--ink); font: 800 1rem var(--font-display);
+  padding: 8px 14px; border-radius: 18px 18px 18px 4px; box-shadow: var(--shadow);
+}
+.mascot__bubble[hidden] { display: none; }
+.mascot.is-cheer { animation: jump .7s ease; }
+.mascot.is-oops  { animation: wobble .6s ease; }
+@keyframes bob    { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes jump   { 0% { transform: translateY(0) scale(1); } 35% { transform: translateY(-26px) scale(1.15) rotate(-8deg); } 70% { transform: translateY(0) scale(.95) rotate(6deg); } 100% { transform: none; } }
+@keyframes wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+.mascot-slot { display: flex; justify-content: center; margin-bottom: 6px; }
+.mascot-slot .mascot { width: 120px; height: 120px; }
+.mascot-slot .mascot__bubble { left: 75%; bottom: 80%; max-width: 240px; font-size: 1.15rem; }
+
+/* ---------- Colorful child theme ---------- */
+.child-theme { background: linear-gradient(180deg, #d9f1ff 0%, #f1e8ff 55%, #fff3d6 100%) fixed; }
+/* position only (no z-index): the floating background sits first in the page, so content paints above it
+   and pop-ups (z-index 150) stay above the footer */
+.child-theme main, .child-theme .site-footer { position: relative; }
+.fun-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.fun-bg span { position: absolute; font-family: var(--font-display); font-weight: 800; opacity: .22; animation: float 9s ease-in-out infinite; }
+
+/* Each learning card gets its own happy color, and icons bounce */
+.child-theme .world-card:nth-child(5n+1), .child-theme .lesson-card:nth-child(5n+1) { background: linear-gradient(180deg, #fff, #ffe6df); }
+.child-theme .world-card:nth-child(5n+2), .child-theme .lesson-card:nth-child(5n+2) { background: linear-gradient(180deg, #fff, #dff3ff); }
+.child-theme .world-card:nth-child(5n+3), .child-theme .lesson-card:nth-child(5n+3) { background: linear-gradient(180deg, #fff, #dcf8ec); }
+.child-theme .world-card:nth-child(5n+4), .child-theme .lesson-card:nth-child(5n+4) { background: linear-gradient(180deg, #fff, #fff3c4); }
+.child-theme .world-card:nth-child(5n),   .child-theme .lesson-card:nth-child(5n)   { background: linear-gradient(180deg, #fff, #ebe3ff); }
+.child-theme .world-card .card__icon { display: inline-block; animation: bob 3s ease-in-out infinite; }
+.child-theme .world-card:nth-child(2n) .card__icon { animation-delay: -1.2s; }
+.child-theme .world-card:nth-child(3n) .card__icon { animation-delay: -2.1s; }
+.child-theme a.world-card:hover, .child-theme .lesson-card:hover { transform: translateY(-6px) rotate(-1.5deg) scale(1.03); }
+
+/* Tiles: pastel colors + pop when tapped */
+.child-theme .tile:nth-child(4n+1) { background: #fff1ec; }
+.child-theme .tile:nth-child(4n+2) { background: #e9f6ff; }
+.child-theme .tile:nth-child(4n+3) { background: #eafaf3; }
+.child-theme .tile:nth-child(4n)   { background: #fff8dc; }
+.child-theme .tile.is-seen { background: #f2fffa; animation: pop .45s ease; }
+.child-theme .choice.is-right, .child-theme .mem-card.is-matched, .child-theme .match-card.is-matched { animation: pop .5s ease; }
+
+/* Bigger, bouncier buttons on child pages */
+.child-theme .btn { transition: transform .15s ease, box-shadow .15s ease; }
+.child-theme .btn:hover { transform: translateY(-3px) scale(1.04); }
+.child-theme .child-hero__avatar { animation: bob 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot, .fun-bg span, .child-theme .world-card .card__icon, .child-theme .child-hero__avatar { animation: none !important; }
+}

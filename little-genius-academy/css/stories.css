@@ -1,0 +1,117 @@
+/* Little Genius Academy — stories.css : the storybook (cover, open book, picture page, reading highlight) */
+
+.storybook { position: relative; max-width: 940px; margin: 14px auto 0; }
+
+/* ---------- the open book: leather cover frame, picture page + paper page ---------- */
+.spread {
+  display: grid; grid-template-columns: 1fr; position: relative;
+  background: linear-gradient(180deg, #8f5d3c, #6c4228); padding: 12px; border-radius: 28px;
+  box-shadow: 0 18px 36px rgba(80, 50, 30, .38), inset 0 0 0 3px rgba(255, 215, 140, .35);
+}
+.scene { position: relative; overflow: hidden; border-radius: 18px 18px 0 0; aspect-ratio: 4 / 3; background: #bfe8ff; border: 4px solid #f3e6c9; border-bottom: 0; }
+.scene svg { display: block; width: 100%; height: 100%; }
+.paper {
+  background: #fffaf0; border-radius: 0 0 18px 18px; border: 4px solid #f3e6c9; border-top: 3px dashed #eadcc0;
+  padding: 18px 16px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 200px;
+}
+.paper__num { font: 800 .9rem var(--font-display); color: #a58660; margin: 10px 0 0; letter-spacing: .05em; }
+.book__text {
+  font: 800 clamp(1.55rem, 5.6vw, 2.3rem) var(--font-display); line-height: 1.45; color: #3b3355; margin: 0;
+}
+.book__text .line { display: block; margin: .15em 0; }
+.book__text .w { display: inline-block; padding: 0 .1em; border-radius: 10px; transition: background .12s, transform .12s; }
+.book__text .w.is-on { background: #ffe27a; transform: scale(1.1); box-shadow: 0 2px 0 #f0c545; }
+
+/* two pages side by side on tablets and computers */
+@media (max-width: 759px) { .scene { aspect-ratio: 16 / 11; } .paper { min-height: 150px; padding: 14px 14px 10px; } }
+@media (min-width: 760px) {
+  .spread { grid-template-columns: 1fr 1fr; padding: 16px; }
+  .spread::after {
+    content: ""; position: absolute; top: 16px; bottom: 16px; left: 50%; width: 30px; margin-left: -15px; pointer-events: none; z-index: 2;
+    background: linear-gradient(90deg, rgba(90, 60, 30, 0), rgba(90, 60, 30, .28) 50%, rgba(90, 60, 30, 0));
+  }
+  .scene { border-radius: 18px 0 0 18px; border-bottom: 4px solid #f3e6c9; border-right: 0; aspect-ratio: auto; min-height: 340px; }
+  .paper { border-radius: 0 18px 18px 0; border-top: 4px solid #f3e6c9; padding: 24px 26px 14px; }
+}
+
+/* ---------- page turning ---------- */
+.paper.is-out-next { transform-origin: left center; animation: p-out-next .27s ease forwards; }
+.paper.is-in-next  { transform-origin: left center; animation: p-in-next .34s ease; }
+.paper.is-out-prev { transform-origin: right center; animation: p-out-prev .27s ease forwards; }
+.paper.is-in-prev  { transform-origin: right center; animation: p-in-prev .34s ease; }
+@keyframes p-out-next { to { transform: perspective(1000px) rotateY(-70deg); opacity: 0; } }
+@keyframes p-in-next  { from { transform: perspective(1000px) rotateY(70deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes p-out-prev { to { transform: perspective(1000px) rotateY(70deg); opacity: 0; } }
+@keyframes p-in-prev  { from { transform: perspective(1000px) rotateY(-70deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.scene.is-new { animation: scene-in .5s ease; }
+@keyframes scene-in { from { opacity: .2; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+
+/* ---------- the closed book (cover) ---------- */
+.cover {
+  position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  padding: 18px 14px; text-align: center; cursor: pointer; transform-origin: left center; transition: transform 1s ease, opacity .3s ease .7s;
+  background: linear-gradient(160deg, #9a40d8 0%, #6d3cc7 55%, #4e2aa8 100%); border-radius: 28px;
+  box-shadow: 0 18px 36px rgba(60, 30, 120, .45), inset 0 0 0 6px rgba(255, 216, 74, .85), inset 0 0 0 10px rgba(255, 255, 255, .18);
+}
+.cover[data-kind="rhyme"] { background: linear-gradient(160deg, #1fb5c9 0%, #2a86d8 55%, #3a54b8 100%); }
+.cover__emoji { width: min(62%, 300px); border-radius: 18px; overflow: hidden; border: 5px solid #fff3c4; background: #fff; box-shadow: 0 8px 18px rgba(0,0,0,.25); font-size: 5rem; line-height: 1.3; }
+.cover__emoji svg { display: block; width: 100%; height: auto; }
+.cover__title { margin: 6px 0 0; font: 800 clamp(1.6rem, 6vw, 2.6rem) var(--font-display); color: #fff3c4; text-shadow: 0 3px 0 rgba(0,0,0,.25); }
+.cover__kind { margin: 0; font: 800 1.05rem var(--font-display); color: #fff; opacity: .92; }
+.cover__open { margin-top: 8px; animation: cover-glow 1.8s ease-in-out infinite; }
+@keyframes cover-glow { 0%, 100% { box-shadow: 0 6px 0 #d9a400, 0 0 0 0 rgba(255, 224, 120, .0); } 50% { box-shadow: 0 6px 0 #d9a400, 0 0 0 10px rgba(255, 224, 120, .55); } }
+.cover.is-open { transform: perspective(1400px) rotateY(-115deg); opacity: 0; pointer-events: none; }
+.cover.is-gone { display: none; }
+@media (max-width: 759px) { .cover__emoji { width: min(70%, 260px); } }
+
+/* ---------- buttons under the book ---------- */
+.book__nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.book__nav .btn { min-height: 54px; }
+.book__nav .btn[disabled] { opacity: .4; cursor: default; }
+.dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.dots span { width: 12px; height: 12px; border-radius: 50%; background: #d9d3f5; transition: transform .2s, background .2s; }
+.dots .is-past { background: #8fd68a; }
+.dots .is-here { background: #6c4cd9; transform: scale(1.35); }
+.book__tools { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 3px solid #d9d3f5; border-radius: 999px;
+  padding: 8px 16px; min-height: 44px; font: 800 .95rem var(--font-display); color: var(--ink); cursor: pointer;
+}
+.pill:hover { background: #f1ecff; }
+.pill[aria-pressed="true"] { background: #f1ecff; border-color: #6c4cd9; }
+.pill[hidden] { display: none; }
+
+/* ---------- backup picture for stories that have no drawn art (emoji scene) ---------- */
+.scene--day { background: linear-gradient(180deg, #a9e2ff, #eaf9ff); }
+.scene--rain { background: linear-gradient(180deg, #8fa6c9, #c9d7ea); }
+.scene--night { background: linear-gradient(180deg, #1f1b4d, #4b3f93); }
+.scene--pond { background: linear-gradient(180deg, #a9e2ff, #eaf9ff); }
+.scene--art { background: #fff; }
+.scene:not(.scene--art) .sc-sun { position: absolute; top: 8%; right: 8%; width: 64px; height: 64px; border-radius: 50%; background: #ffd84a; box-shadow: 0 0 0 10px rgba(255,216,74,.35); }
+.scene:not(.scene--art) .sc-moon { position: absolute; top: 8%; right: 10%; width: 56px; height: 56px; border-radius: 50%; background: #fff2a8; display: none; }
+.scene--night .sc-sun, .scene--rain .sc-sun { display: none; } .scene--night .sc-moon { display: block; }
+.scene .sc-star { position: absolute; color: #fff; font-size: 1rem; display: none; animation: twinkle 2.4s ease-in-out infinite; }
+.scene--night .sc-star { display: block; }
+@keyframes twinkle { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+.scene .sc-cloud { position: absolute; width: 80px; height: 30px; border-radius: 30px; background: #fff; top: 14%; left: 12%; opacity: .9; }
+.scene .sc-cloud.c2 { top: 26%; left: 55%; width: 60px; }
+.scene .sc-drop { position: absolute; top: -10%; width: 3px; height: 18px; border-radius: 3px; background: #5bb8f0; display: none; animation: rain-fall .9s linear infinite; }
+.scene--rain .sc-drop { display: block; }
+@keyframes rain-fall { to { transform: translateY(420px); } }
+.scene .sc-hill { position: absolute; bottom: -30%; border-radius: 50%; background: #8fd68a; }
+.scene .sc-hill.h1 { left: -20%; width: 90%; height: 60%; } .scene .sc-hill.h2 { right: -25%; width: 90%; height: 52%; background: #6cc070; }
+.scene .sc-pond { position: absolute; bottom: 4%; left: 20%; width: 60%; height: 18%; border-radius: 50%; background: #5bb8f0; display: none; }
+.scene--pond .sc-pond { display: block; }
+.scene .sc-flowers { position: absolute; bottom: 2%; left: 4%; font-size: 1.3rem; letter-spacing: 10px; opacity: .9; }
+.scene .cast { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 4%; font-size: clamp(3.5rem, 14vw, 6rem); }
+.scene .cast--3 { font-size: clamp(3rem, 11vw, 4.8rem); }
+.actor { display: inline-block; }
+.actor.is-bounce { animation: bob 1.8s ease-in-out infinite; }
+.actor.is-float  { animation: bob 3.2s ease-in-out infinite; }
+.actor.is-sway   { animation: sway 3s ease-in-out infinite; }
+@keyframes sway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .paper.is-out-next, .paper.is-in-next, .paper.is-out-prev, .paper.is-in-prev, .scene.is-new, .cover__open, .actor, .scene .sc-star, .scene .sc-drop { animation: none !important; }
+  .cover { transition: none; } .book__text .w, .dots span { transition: none; }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Genius Academy — Play • Explore • Learn • Grow</title>
+  <meta name="description" content="A safe, joyful learning world for children aged 2–6.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-root="" data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Welcome / loading screen (with small creator credit) -->
+  <div class="loader" id="welcome-loader" role="status" aria-live="polite">
+    <div class="loader__logo">Little Genius Academy</div>
+    <div class="loader__tag">Play • Explore • Learn • Grow</div>
+    <div class="loader__spinner" aria-hidden="true"></div>
+    <span class="visually-hidden">Loading</span>
+    <p class="creator-credit creator-credit--dark creator-credit--small" data-creator-credit>Made by Mrs. Shabnam Naz Lakho</p>
+  </div>
+
+  <header id="site-header"></header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="floaters" aria-hidden="true">
+        <span class="floater" style="left:6%;top:14%;color:var(--coral)">A</span>
+        <span class="floater" style="left:84%;top:10%;color:var(--sky-deep);animation-delay:-2s">1</span>
+        <span class="floater" style="left:14%;top:68%;color:var(--purple-deep);animation-delay:-4s">B</span>
+        <span class="floater" style="left:88%;top:62%;color:var(--mint);animation-delay:-1s">2</span>
+        <span class="floater" style="left:48%;top:4%;color:var(--sun);animation-delay:-3s">★</span>
+      </div>
+      <div class="container">
+        <p class="hero__tag">Play • Explore • Learn • Grow</p>
+        <h1>Welcome to <br>Little Genius Academy</h1>
+        <p class="lead">A safe, joyful learning world where children aged 2–6 discover letters, numbers, colors and animals through play.</p>
+        <div class="hero__actions">
+          <a class="btn btn--sun" href="learning-levels.html">Explore Learning Levels</a>
+          <a class="btn btn--ghost" href="about.html">About Us</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="center">A world of learning</h2>
+        <div class="grid grid--3">
+          <article class="card card--coral"><div class="card__icon" aria-hidden="true">🔤</div><h3>ABC Alphabet World</h3><p>Letters, sounds and first words. <span class="badge-soon">Coming Soon</span></p></article>
+          <article class="card card--sky"><div class="card__icon" aria-hidden="true">🔢</div><h3>Number Kingdom</h3><p>Counting and number fun. <span class="badge-soon">Coming Soon</span></p></article>
+          <article class="card card--mint"><div class="card__icon" aria-hidden="true">🎨</div><h3>Colors &amp; Shapes</h3><p>A garden of colors and shapes. <span class="badge-soon">Coming Soon</span></p></article>
+          <article class="card card--sun"><div class="card__icon" aria-hidden="true">🦁</div><h3>Animal World</h3><p>Animal names and sounds. <span class="badge-soon">Coming Soon</span></p></article>
+          <article class="card card--purple"><div class="card__icon" aria-hidden="true">🧩</div><h3>Picture Matching</h3><p>Match, sort and remember. <span class="badge-soon">Coming Soon</span></p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Homepage creator credit -->
+    <section class="credit-band" aria-label="Creator">
+      <p class="creator-credit" data-creator-credit>Made by Mrs. Shabnam Naz Lakho</p>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

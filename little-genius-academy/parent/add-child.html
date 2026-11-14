@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add a child — Little Genius Academy</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Cormorant+Garamond:ital,wght@1,600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body data-root="../" data-page="add-child">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <div class="area-bar"><div class="container area-bar__inner">
+    <nav aria-label="Parent area">
+      <a href="choose-child.html">Choose child</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="add-child.html">Add child</a>
+      <a href="progress.html">Progress</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <span><span id="who"></span> <button type="button" class="btn btn--ghost btn--small" id="logout-btn">Log out</button></span>
+  </div></div>
+  <main id="main">
+    <section class="section"><div class="container">
+      <div class="card card--sun form-card">
+        <h1 id="form-title" style="font-size:2rem">Add a child</h1>
+        <p class="muted" style="margin-bottom:20px">We only ask for a nickname. Please do not use your child's full name.</p>
+        <p class="msg" id="form-msg" role="alert" hidden></p>
+        <form id="child-form" novalidate>
+          <div class="field"><label for="nickname">Nickname</label><input type="text" id="nickname" name="nickname" maxlength="30" required autocomplete="off"></div>
+          <div class="field"><label for="level">Learning level</label><select id="level" name="level" required><option value="">Choose a level…</option></select>
+            <p class="hint">Pick by age. You can change it later.</p></div>
+          <fieldset class="field" style="border:0;padding:0;margin:0 0 18px"><legend>Pick an avatar</legend><div class="avatar-picker" id="avatar-picker"></div></fieldset>
+          <button class="btn" id="submit-btn" type="submit">Save child</button>
+        </form>
+        <div class="form-links"><a href="dashboard.html">Cancel</a></div>
+      </div>
+    </div></section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/parent-dashboard.js"></script>
+</body>
+</html>

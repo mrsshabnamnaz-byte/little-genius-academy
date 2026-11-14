@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coming Soon | Little Genius Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Fredoka:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-base="" data-page="">
+  <div id="site-header"></div>
+  <main id="main">
+    <section class="empty-state container">
+      <div class="big" aria-hidden="true">🚧</div>
+      <h1 id="page-name">This page</h1>
+      <p class="prose">We are still building this part of the academy. It will be ready in a later step!</p>
+      <a class="btn btn-primary" href="index.html">Back to Home</a>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/utils.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    // textContent (not innerHTML) so the URL value can never inject code.
+    const name = new URLSearchParams(location.search).get("page");
+    if (name) {
+      document.getElementById("page-name").textContent = name.slice(0, 40) + " is Coming Soon";
+      document.title = name.slice(0, 40) + " | Coming Soon | Little Genius Academy";
+    }
+  </script>
+</body>
+</html>
