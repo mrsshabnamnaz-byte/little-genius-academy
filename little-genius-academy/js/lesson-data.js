@@ -54,10 +54,11 @@ LGA.resolveItem = function (item) {
   if (/^[A-Z]$/.test(text) && D.letters[text]) {
     const [word, emoji] = D.letters[text];
     const name = D.letterNames[text], sound = D.letterSounds[text];
+    // Real letters inside normal sentences are read much more clearly than spelled-out sounds like "ay" or "bee".
     const parts = {
-      name: name + ".",
-      sound: sound + ".",
-      word: name + " is for " + word + "."
+      name: "Letter " + text + ".",
+      sound: text + " says " + sound + ".",
+      word: text + " is for " + word + "."
     };
     return { kind: "letter", tile: text + text.toLowerCase(), word, sub: text + " is for " + word, emoji, parts,
              say: [parts.name, parts.sound, parts.word] };

@@ -48,8 +48,10 @@
       if (muted || !("speechSynthesis" in window)) return;   // words are ALWAYS also shown on screen
       if (!queue) window.speechSynthesis.cancel();
       (Array.isArray(text) ? text : [text]).forEach((part) => {
-        const u = new SpeechSynthesisUtterance(part);
-        u.lang = "en-US"; u.rate = 0.8; u.pitch = 1.1;
+        // Use the shared "best voice" picker from sound.js when it is loaded.
+        let u;
+        if (LGA.sound && LGA.sound.makeUtterance) u = LGA.sound.makeUtterance(part);
+        else { u = new SpeechSynthesisUtterance(part); u.lang = "en-US"; u.rate = 0.8; u.pitch = 1.1; }
         window.speechSynthesis.speak(u);
       });
     } catch (e) { /* ignore */ }

@@ -13,6 +13,7 @@ LGA.sound = (function () {
   function setMuted(v) {
     muted = v;
     try { localStorage.setItem("lga-mute", v ? "1" : "0"); } catch (e) { /* ignore */ }
+    if (v && typeof music !== "undefined") music.stop();
     if (v && window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch (e) { /* ignore */ } }
   }
 
@@ -154,6 +155,40 @@ LGA.sound = (function () {
   }
 
   // Wire a 🔊/🔇 button
+  // ---------- soft background tune for rhymes ----------
+  // A phone voice cannot really sing, so rhymes get a gentle "Twinkle" style tune playing underneath.
+  const music = (function () {
+    const NOTES = [[261.6, 1], [261.6, 1], [392, 1], [392, 1], [440, 1], [440, 1], [392, 2],
+                   [349.2, 1], [349.2, 1], [329.6, 1], [329.6, 1], [293.7, 1], [293.7, 1], [261.6, 2]];
+    const BEAT = 0.62;
+    let playing = false, timer = null, i = 0;
+    function note(freq, beats) {
+      try {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        ctx = ctx || new AC();
+        if (ctx.state === "suspended") ctx.resume();
+        const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime, d = beats * BEAT;
+        o.type = "triangle"; o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.045, t + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + d * 0.95);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(t); o.stop(t + d);
+      } catch (e) { /* ignore */ }
+    }
+    function step() {
+      if (!playing) return;
+      if (muted) { stop(); return; }
+      const n = NOTES[i % NOTES.length]; i++;
+      note(n[0], n[1]);
+      timer = setTimeout(step, n[1] * BEAT * 1000);
+    }
+    function start() { if (playing || muted) return; playing = true; i = 0; step(); }
+    function stop() { playing = false; clearTimeout(timer); timer = null; }
+    return { start, stop, isPlaying: () => playing };
+  })();
+
   function bindButton(btn) {
     if (!btn) return;
     const paint = () => {
@@ -166,7 +201,7 @@ LGA.sound = (function () {
   }
 
   return {
-    speak, speakThen, speakWords, tone, bindButton, isMuted: () => muted,
+    speak, speakThen, speakWords, makeUtterance, tone, music, bindButton, isMuted: () => muted,
     englishVoices, pickVoice, setVoice, setRate, getRate: () => rateKey, getVoiceName: () => voiceName
   };
 })();

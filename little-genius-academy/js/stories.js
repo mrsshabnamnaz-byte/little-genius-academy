@@ -154,6 +154,7 @@
   }
   function stopReading() {
     narrationId++; clearTimers(); setOn(-1);
+    try { LGA.sound.music.stop(); } catch (e) { /* ignore */ }
     if (audioEl) { try { audioEl.pause(); } catch (e) { /* ignore */ } audioEl = null; }
     try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
   }
@@ -180,6 +181,7 @@
   function readPage() {
     stopReading();
     if (LGA.sound.isMuted()) { LGA.fun.cornerMascot().say("Sound is off. Tap 🔇 to turn it on.", 2800); return; }
+    if (current && current.content && current.content.kind === "rhyme") LGA.sound.music.start();   // soft tune under a rhyme
     const url = clipFor();
     if (url && wordEls.length) { playClip(url); return; }
     if (!("speechSynthesis" in window) || !chunks.length) return;
