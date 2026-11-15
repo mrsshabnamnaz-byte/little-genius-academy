@@ -92,3 +92,4 @@
 .pen-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 3px solid #d9d3f5; border-radius: 999px; padding: 8px 14px; font: 800 .95rem var(--font-display); color: var(--ink); cursor: pointer; min-height: 44px; }
 .pen-btn__dot { display: inline-block; border-radius: 50%; background: #ff6f91; }
 .pen-btn.is-on { background: #f1ecff; border-color: var(--purple, #6c4cd9); }
+.choice.is-picked { background: #e9e4ff; border-color: var(--purple, #7c5cff); }
