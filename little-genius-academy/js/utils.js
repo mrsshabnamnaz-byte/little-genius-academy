@@ -112,3 +112,12 @@ LGA.enforceTimeLimit = async (childId) => {
   } catch (e) { /* if settings cannot be read, do not block the child */ }
   return true;
 };
+
+// Helpers used by the homepage 3D scene.
+LGA.prefersReducedMotion = () => !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+LGA.hasWebGL = () => {
+  try {
+    const c = document.createElement("canvas");
+    return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
+  } catch (e) { return false; }
+};
