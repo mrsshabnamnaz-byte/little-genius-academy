@@ -53,7 +53,7 @@
   // ====================== Games Playground (list) ======================
   if (page === "games") {
     const list = LGA.$("#game-list");
-    const ICONS = { abc_match: "🔤", count_and_win: "🔢", memory_master: "🧠", color_sorter: "🎨", shape_builder: "🏠", trace_and_learn: "✏️" };
+    const ICONS = { abc_match: "🔤", count_and_win: "🔢", memory_master: "🧠", color_sorter: "🎨", shape_builder: "🏠", trace_and_learn: "✏️", puzzle_world: "🧩" };
     const { data, error } = await db.from("games").select("id, title, description, game_type").order("title");
     list.replaceChildren();
     if (error) return LGA.msg(out, "We could not load the games. Please refresh the page.");
@@ -77,7 +77,7 @@
   if (page === "play") {
     const type = new URLSearchParams(window.location.search).get("type");
     const area = LGA.$("#game-area");
-    if (!["abc_match", "count_and_win", "memory_master", "color_sorter", "shape_builder", "trace_and_learn"].includes(type)) {
+    if (!["abc_match", "count_and_win", "memory_master", "color_sorter", "shape_builder", "trace_and_learn", "puzzle_world"].includes(type)) {
       return LGA.msg(out, "That game was not found. Please go back and choose a game.");
     }
     const { data, error } = await db.from("games").select("id, title, instructions").eq("game_type", type);
@@ -169,6 +169,41 @@
             options: shuffle([n, ...wrong]).map((x) => ({ label: String(x), correct: x === n }))
           };
         }));
+      },
+      // Puzzle World: finish the pattern, or find the odd one out.
+      puzzle_world() {
+        const SETS = [["🔴", "🔵", "🟡", "🟢"], ["⭐", "🌙", "☀️", "☁️"], ["🍎", "🍌", "🍇", "🍊"], ["🐶", "🐱", "🐸", "🐥"], ["🚗", "🚲", "✈️", "🚂"]];
+        const GROUPS = [
+          ["🍎", "🍌", "🍇", "🍊", "🍓"], ["🐶", "🐱", "🐮", "🐷", "🐴"], ["🚗", "🚲", "✈️", "🚂", "🚌"],
+          ["🌳", "🌸", "🌻", "🌷", "🌵"], ["⚽", "🏀", "🎾", "🏐", "🎱"]
+        ];
+        const makePattern = () => {
+          const set = shuffle(SETS[Math.floor(Math.random() * SETS.length)]);
+          const kinds = [[0, 1], [0, 1, 1], [0, 1, 2]];
+          const unit = kinds[Math.floor(Math.random() * kinds.length)];
+          const seq = []; while (seq.length < unit.length * 2 + 1) unit.forEach((u) => seq.push(set[u]));
+          const shown = seq.slice(0, unit.length * 2);
+          const answer = seq[unit.length * 2];
+          const wrong = shuffle(set.filter((x) => x !== answer)).slice(0, 2);
+          const v = el("div", "puzzle-seq", shown.join(" ") + " ❓"); v.setAttribute("aria-label", "pattern");
+          return {
+            visual: v, text: "What comes next in the pattern?", speak: "What comes next in the pattern?",
+            say: "Well done! You finished the pattern.",
+            options: shuffle([answer, ...wrong]).map((x) => ({ label: x, correct: x === answer }))
+          };
+        };
+        const makeOdd = () => {
+          const g = shuffle(GROUPS[Math.floor(Math.random() * GROUPS.length)]).slice(0, 2);
+          const other = shuffle(GROUPS.filter((x) => !x.includes(g[0])))[0][0];
+          const all = shuffle([...g, other]);
+          const v = el("div", "prompt__pic", "🔎"); v.setAttribute("aria-hidden", "true");
+          return {
+            visual: v, text: "Which one is different?", speak: "Which one is different?",
+            say: "Great spotting! That one is different.",
+            options: all.map((x) => ({ label: x, correct: x === other }))
+          };
+        };
+        choiceGame(() => [makePattern(), makeOdd(), makePattern(), makeOdd(), makePattern()]);
       },
       // What colour is this? (Colour name is always written on the button too.)
       color_sorter() {

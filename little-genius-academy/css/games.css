@@ -93,3 +93,4 @@
 .pen-btn__dot { display: inline-block; border-radius: 50%; background: #ff6f91; }
 .pen-btn.is-on { background: #f1ecff; border-color: var(--purple, #6c4cd9); }
 .choice.is-picked { background: #e9e4ff; border-color: var(--purple, #7c5cff); }
+.puzzle-seq { font-size: clamp(1.7rem, 8vw, 2.6rem); line-height: 1.3; text-align: center; letter-spacing: .08em; word-spacing: .1em; }
