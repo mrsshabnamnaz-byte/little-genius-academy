@@ -53,7 +53,7 @@
   // ====================== Games Playground (list) ======================
   if (page === "games") {
     const list = LGA.$("#game-list");
-    const ICONS = { abc_match: "🔤", count_and_win: "🔢", memory_master: "🧠", color_sorter: "🎨", shape_builder: "🏠", trace_and_learn: "✏️", puzzle_world: "🧩" };
+    const ICONS = { abc_match: "🔤", count_and_win: "🔢", memory_master: "🧠", color_sorter: "🎨", shape_builder: "🏠", trace_and_learn: "✏️", puzzle_world: "🧩", phonics_sounds: "👂" };
     const { data, error } = await db.from("games").select("id, title, description, game_type").order("title");
     list.replaceChildren();
     if (error) return LGA.msg(out, "We could not load the games. Please refresh the page.");
@@ -77,7 +77,7 @@
   if (page === "play") {
     const type = new URLSearchParams(window.location.search).get("type");
     const area = LGA.$("#game-area");
-    if (!["abc_match", "count_and_win", "memory_master", "color_sorter", "shape_builder", "trace_and_learn", "puzzle_world"].includes(type)) {
+    if (!["abc_match", "count_and_win", "memory_master", "color_sorter", "shape_builder", "trace_and_learn", "puzzle_world", "phonics_sounds"].includes(type)) {
       return LGA.msg(out, "That game was not found. Please go back and choose a game.");
     }
     const { data, error } = await db.from("games").select("id, title, instructions").eq("game_type", type);
@@ -114,6 +114,7 @@
         r.options.forEach((o) => {
           const b = el("button", "choice", o.label);
           b.type = "button";
+          if (o.small) b.classList.add("choice--word");
           if (o.bg) { b.classList.add("choice--color"); b.style.setProperty("--bg", o.bg); b.style.setProperty("--fg", o.fg || "#26264a"); }
           b.addEventListener("click", () => {
             if (done) return;
@@ -204,6 +205,32 @@
           };
         };
         choiceGame(() => [makePattern(), makeOdd(), makePattern(), makeOdd(), makePattern()]);
+      },
+      // Phonics: hear a letter sound, then find the letter or a picture that starts with it.
+      phonics_sounds() {
+        const D = LGA.DATA;
+        const letters = Object.keys(D.letters).filter((L) => !["X", "Q"].includes(L));   // X and Q sounds are tricky for tiny ears
+        const picks = shuffle(letters).slice(0, ROUNDS);
+        choiceGame(() => picks.map((L, idx) => {
+          const sound = D.letterSounds[L];
+          const v = el("div", "prompt__pic", "👂"); v.setAttribute("aria-hidden", "true");
+          const ask = "Which one starts with the sound " + sound + "?";
+          if (idx % 2 === 0) {                       // sound -> letter
+            const wrong = shuffle(letters.filter((x) => x !== L)).slice(0, 2);
+            return {
+              visual: v, text: "Which letter says " + sound + "?", speak: "Which letter says " + sound + "?",
+              say: D.letterNames[L] + " says " + sound + ".",
+              options: shuffle([L, ...wrong]).map((x) => ({ label: x, correct: x === L }))
+            };
+          }
+          const word = D.letters[L];                 // sound -> picture
+          const wrong = shuffle(letters.filter((x) => x !== L)).slice(0, 2).map((x) => D.letters[x]);
+          return {
+            visual: v, text: ask, speak: ask,
+            say: word[0] + " starts with " + sound + ".",
+            options: shuffle([word, ...wrong]).map((w) => ({ label: w[1] + "\n" + w[0], small: true, correct: w === word }))
+          };
+        }));
       },
       // What colour is this? (Colour name is always written on the button too.)
       color_sorter() {
