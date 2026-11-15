@@ -69,7 +69,7 @@
         </div>
         <div class="footer__bottom">
           <p class="creator-credit creator-credit--dark creator-credit--small">${cfg.creatorCredit}</p>
-          <span><a href="${root}privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · © ${new Date().getFullYear()} ${cfg.appName}</span>
+          <span><a href="${root}guide.html" style="color:inherit;text-decoration:underline">Parents' Guide</a> · <a href="${root}privacy.html" style="color:inherit;text-decoration:underline">Privacy</a> · © ${new Date().getFullYear()} ${cfg.appName}</span>
         </div>
       </div>`;
   }
