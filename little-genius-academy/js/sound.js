@@ -72,6 +72,26 @@ LGA.sound = (function () {
     } catch (e) { /* ignore */ }
   }
 
+  // Say something, then call next() when the voice has really finished (not before).
+  // minMs = never earlier than this; maxMs = safety limit if the device never reports "finished".
+  function speakThen(text, next, minMs, maxMs) {
+    let called = false;
+    const t0 = Date.now();
+    const go = () => {
+      if (called) return; called = true;
+      const wait = Math.max(0, (minMs || 0) - (Date.now() - t0));
+      setTimeout(next, wait);
+    };
+    try {
+      if (muted || !("speechSynthesis" in window)) { setTimeout(go, minMs || 900); return; }
+      window.speechSynthesis.cancel();
+      const u = makeUtterance(text);
+      u.onend = go; u.onerror = go;
+      window.speechSynthesis.speak(u);
+      setTimeout(go, maxMs || 7000);
+    } catch (e) { setTimeout(go, minMs || 900); }
+  }
+
   // Read a text slowly, one sentence at a time (small pauses), and tell us which word is being said
   // so the book can highlight it. onWord(i) gets the word number, onEnd() fires once at the very end.
   // Returns { cancel() }. If the device cannot tell us word positions, we estimate them with a timer.
@@ -146,7 +166,7 @@ LGA.sound = (function () {
   }
 
   return {
-    speak, speakWords, tone, bindButton, isMuted: () => muted,
+    speak, speakThen, speakWords, tone, bindButton, isMuted: () => muted,
     englishVoices, pickVoice, setVoice, setRate, getRate: () => rateKey, getVoiceName: () => voiceName
   };
 })();

@@ -123,8 +123,8 @@
               if (!wrongTried) { score += 10; streak++; }
               b.classList.add("is-right");
               LGA.fun.cheer(b, streak >= 2 ? streak + " in a row!" : undefined);
-              LGA.sound.tone(true); LGA.sound.speak(r.say);
-              setTimeout(() => { i++; next(); }, 1500);
+              LGA.sound.tone(true);
+              LGA.sound.speakThen(r.say, () => { i++; next(); }, 1200);
             } else {
               wrongTried = true; streak = 0;
               b.classList.add("is-wrong"); b.disabled = true;
@@ -303,9 +303,8 @@
                 if (step === r.pieces.length) {
                   score += mistakes ? 5 : 10;
                   LGA.fun.cheer(mine, "You built a " + r.name + "!");
-                  LGA.sound.speak("You built a " + r.name + "!");
                   hint.textContent = "✅ A " + r.name + "!"; hint.className = "match-feedback match-feedback--good";
-                  setTimeout(() => { ri++; round(); }, 1800);
+                  LGA.sound.speakThen("You built a " + r.name + "!", () => { ri++; round(); }, 1500);
                 } else { LGA.fun.burst(b, 8); say(); LGA.sound.speak("Now the " + r.pieces[step].s); }
               } else {
                 mistakes++; LGA.fun.oops(); LGA.sound.tone(false);
@@ -422,8 +421,8 @@
               done = true; score += mistakes ? 5 : 10;
               meter.textContent = "✅ You traced it!"; meter.className = "match-feedback match-feedback--good";
               LGA.fun.cheer(ink, "You traced " + (isNum ? "" : "the letter ") + ch + "!");
-              LGA.sound.tone(true); LGA.sound.speak("Great tracing! " + spoken + ".");
-              setTimeout(() => { gi++; round(); }, 1900);
+              LGA.sound.tone(true);
+              LGA.sound.speakThen("Great tracing! " + spoken + ".", () => { gi++; round(); }, 1500);
             } else if (r.stray > STRAY) {
               mistakes++; meter.textContent = "Stay on the dotted line 🌈 Tap “Start again”."; meter.className = "match-feedback match-feedback--bad";
               LGA.fun.oops("Stay on the line!"); LGA.sound.tone(false);
